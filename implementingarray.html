@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array methods</title>
+</head>
+<body>
+   <h1>creating array methods</h1>
+</body>
+</html>
+<script>
+     function array(){
+        Object.defineProperty(this,"length",{
+            enumerable:false,
+            writable:true,
+        })
+       for(let i=0;i<arguments.length;i++){
+        this[i]=arguments[i];
+        this.length=arguments.length;
+       }
+     }
+     array.prototype.myPush=function(x){
+        let index=this.length;
+        this[index]=x;
+        this.length++;
+     }
+     array.prototype.myPop=function(){
+        let index=this.length-1;
+        let popElement=this[index];
+        delete this[index];
+        this.length--;
+        return popElement;
+     }
+     array.prototype.top=function(){
+        let index=this.length-1;
+        return this[index];
+     }
+     array.prototype.size=function(){
+        let index=this.length;
+        return index;
+     }
+     array.prototype.printReverse=function(){
+        let end=this.length-1;
+        let start=0;
+        while(start<end){
+            let temp=this[start];
+            this[start]=this[end];
+            this[end]=temp;
+            start++;
+            end--;
+        }
+        return this;
+     }
+    let a=new array(4,5,6,7,8,9,20)
+        console.log(a.printReverse())
+</script>
